@@ -48,7 +48,8 @@ class Solution:
     def total_item_orders(self) -> int:
        # TODO How many items were orderd in total?
        total_item_orders = self.chipo.quantity.sum()
-       print(total_item_orders)
+       print("Total items ordered " + str(total_item_orders))
+       return total_item_orders
    
     def total_sales(self) -> float:
         # TODO 
@@ -56,22 +57,30 @@ class Solution:
         # 2. Calculate total sales.
         floatedvalue = lambda x: float(x[1:-1])
         self.chipo.item_price = self.chipo.item_price.apply(floatedvalue)
-        totalsales = (self.chipo['quantity']* chipo['item_price']).sum()
-        print(str(np.round(totalsales,2)))
+        totalsales = (self.chipo['quantity']*self.chipo['item_price']).sum()
+        print("Total sales in $ value is " + str(np.round(totalsales,2)))
+        return totalsales
    
     def num_orders(self) -> int:
         # TODO
         # How many orders were made in the dataset?
-        return -1
+        totalorders = self.chipo.order_id.value_counts().count()
+        print ("Total orders that were processed are " + str(totalorders))
+        return totalorders
     
     def average_sales_amount_per_order(self) -> float:
         # TODO
-        return 0.0
+        self.chipo['totaldollar'] =self.chipo['quantity'] * self.chipo['item_price']
+        avgsaleperorder = self.chipo.groupby(by=['order_id']).sum().mean()['totaldollar']
+        print("Mean order value per order " + str(np.round(avgsaleperorder,2)))
+        return (np.round(avgsaleperorder,2))
 
     def num_different_items_sold(self) -> int:
         # TODO
         # How many different items are sold?
-        return -1
+        print (self.chipo.item_name.value_counts().count())
+
+        return self.chipo.item_name.value_counts().count()
     
     def plot_histogram_top_x_popular_items(self, x:int) -> None:
         from collections import Counter
@@ -122,10 +131,10 @@ def test() -> None:
     total = solution.total_item_orders()
     assert total == 4972
     assert 39237.02 == solution.total_sales()
-    """
     assert 1834 == solution.num_orders()
     assert 21.39 == solution.average_sales_amount_per_order()
     assert 50 == solution.num_different_items_sold()
+    """
     solution.plot_histogram_top_x_popular_items(5)
     solution.scatter_plot_num_items_per_order_price()
     """
