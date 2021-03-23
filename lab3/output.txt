@@ -1,0 +1,4 @@
+python lab3.py
+Accuracy Score is : 0.7792207792207793
+[[85 15]
+ [19 35]]
