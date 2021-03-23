@@ -2,3 +2,10 @@ python lab3.py
 Accuracy Score is : 0.7792207792207793
 [[85 15]
  [19 35]]
+ 
+From the confusion matrix we know, 
+
+True Positives (TP): 35 people correctly predicted have diabetes
+True Negatives (TN): 85 people correctly predicted do not have diabetes
+False Positives (FP): 15 people are incorrectly predicted as having diabetes (a "Type I error")
+False Negatives (FN): 19 people are incorrectly predicted as not having diabetes (a "Type II error")
